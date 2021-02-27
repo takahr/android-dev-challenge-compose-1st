@@ -23,14 +23,14 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.theme.PuppyAppTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyTheme {
-                MyApp()
+            PuppyAppTheme {
+                PuppyApp()
             }
         }
     }
@@ -47,7 +47,7 @@ fun MyApp() {
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
-    MyTheme {
+    PuppyAppTheme {
         MyApp()
     }
 }
@@ -55,7 +55,7 @@ fun LightPreview() {
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-    MyTheme(darkTheme = true) {
+    PuppyAppTheme(darkTheme = true) {
         MyApp()
     }
 }
