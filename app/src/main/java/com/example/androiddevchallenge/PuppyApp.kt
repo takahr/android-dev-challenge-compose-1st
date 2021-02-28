@@ -26,7 +26,7 @@ fun PuppyApp() {
 
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
-
+    PuppyList()
 }
 
 @Preview
