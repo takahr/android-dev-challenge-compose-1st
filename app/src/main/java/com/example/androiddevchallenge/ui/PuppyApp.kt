@@ -1,4 +1,4 @@
-package com.example.androiddevchallenge
+package com.example.androiddevchallenge.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -29,10 +29,18 @@ fun BodyContent(modifier: Modifier = Modifier) {
     PuppyList()
 }
 
-@Preview
+@Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
-fun PuppyAppPreview() {
+fun LightPreview() {
     PuppyAppTheme {
+        PuppyApp()
+    }
+}
+
+@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun DarkPreview() {
+    PuppyAppTheme(darkTheme = true) {
         PuppyApp()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.androiddevchallenge
+package com.example.androiddevchallenge.ui
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
