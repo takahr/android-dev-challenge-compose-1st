@@ -1,11 +1,9 @@
 package com.example.androiddevchallenge.ui
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.androiddevchallenge.ui.theme.PuppyAppTheme
 
@@ -20,13 +18,8 @@ fun PuppyApp() {
             )
         }
     ) { innerPadding ->
-        BodyContent(Modifier.padding(innerPadding))
+        PuppyList(padding = innerPadding)
     }
-}
-
-@Composable
-fun BodyContent(modifier: Modifier = Modifier) {
-    PuppyList()
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
