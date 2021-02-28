@@ -1,7 +1,6 @@
 package com.example.androiddevchallenge.ui
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
@@ -9,29 +8,35 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.InsertPhoto
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androiddevchallenge.data.PuppyItem
+import com.example.androiddevchallenge.data.PuppyListViewModel
 import com.example.androiddevchallenge.ui.theme.grayTintColor
 
 @Composable
-fun ListItem(index: Int) {
-    Row() {
-        Icon(imageVector = Icons.Default.InsertPhoto,
+fun ListItem(item: PuppyItem) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(modifier = Modifier.width(50f.dp).height(50f.dp), imageVector = Icons.Default.InsertPhoto,
             tint = grayTintColor,
             contentDescription = null)
-        Text(text = "aaa")
+        Text(text = item.name)
     }
 }
 
 @Composable
-fun PuppyList(padding: PaddingValues = PaddingValues(all = 0f.dp)) {
+fun PuppyList(
+    puppyListViewModel: PuppyListViewModel = viewModel(),
+    padding: PaddingValues = PaddingValues(all = 0f.dp)) {
     val scrollState = rememberLazyListState()
 
     LazyColumn(state = scrollState,
         contentPadding = padding) {
-        items(count = 10) {
-            ListItem(it)
+        items(count = puppyListViewModel.puppyItems.size) {
+            ListItem(puppyListViewModel.puppyItems[it])
         }
     }
 }
@@ -39,7 +44,7 @@ fun PuppyList(padding: PaddingValues = PaddingValues(all = 0f.dp)) {
 @Preview
 @Composable
 fun ListItemPreview() {
-    ListItem(1)
+    ListItem(PuppyItem(name = "name"))
 }
 
 @Preview
