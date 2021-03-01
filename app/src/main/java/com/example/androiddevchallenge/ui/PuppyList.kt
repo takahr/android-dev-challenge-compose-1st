@@ -28,7 +28,8 @@ fun ListItem(item: PuppyItem,
         modifier = modifier.fillMaxWidth().clickable {
             onClick(item)
         }) {
-        Icon(modifier = Modifier.width(50f.dp).height(50f.dp), imageVector = Icons.Default.InsertPhoto,
+        Icon(modifier = Modifier.width(50f.dp).height(50f.dp),
+            imageVector = Icons.Default.InsertPhoto,
             tint = grayTintColor,
             contentDescription = null)
         Text(text = item.name)
