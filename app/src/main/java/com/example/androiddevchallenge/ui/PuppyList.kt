@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.filled.InsertPhoto
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,26 +22,35 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import com.example.androiddevchallenge.data.PuppyItem
 import com.example.androiddevchallenge.data.PuppyListViewModel
-import com.example.androiddevchallenge.ui.theme.PuppyAppTheme
 import com.example.androiddevchallenge.ui.theme.grayTintColor
 
 @Composable
-fun ListItem(item: PuppyItem,
+fun ListItem(puppyItem: PuppyItem,
              modifier: Modifier = Modifier,
              onClick: (PuppyItem) -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .fillMaxWidth()
             .clickable {
-                onClick(item)
+                onClick(puppyItem)
             }) {
-        Icon(modifier = Modifier
-            .width(50f.dp)
-            .height(50f.dp),
-            imageVector = Icons.Default.InsertPhoto,
-            tint = grayTintColor,
-            contentDescription = null)
-        Text(text = item.name)
+        val modifier = Modifier
+            .width(80f.dp)
+            .height(80f.dp)
+        if (puppyItem.thumbnailId > 0) {
+            Image(
+                painter = painterResource(id = puppyItem.thumbnailId),
+                contentDescription = null,
+                modifier = modifier)
+        } else {
+            Icon(
+                imageVector = Icons.Default.InsertPhoto,
+                tint = grayTintColor,
+                contentDescription = null,
+                modifier = modifier)
+        }
+        Spacer(modifier = Modifier.width(10f.dp))
+        Text(text = puppyItem.name)
     }
 }
 

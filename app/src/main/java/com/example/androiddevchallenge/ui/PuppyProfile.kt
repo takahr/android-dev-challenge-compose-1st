@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -7,6 +8,8 @@ import androidx.compose.material.icons.filled.InsertPhoto
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -18,12 +21,21 @@ import com.example.androiddevchallenge.ui.theme.grayTintColor
 @Composable
 fun PuppyProfile(puppyItem: PuppyItem) {
     Column {
-        Icon(modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1.2f),
-            imageVector = Icons.Default.InsertPhoto,
-            tint = grayTintColor,
-            contentDescription = null)
+        val modifier = Modifier.fillMaxWidth()
+            .aspectRatio(1.2f)
+        if (puppyItem.imageId > 0) {
+            Image(
+                painter = painterResource(id = puppyItem.imageId),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = modifier)
+        } else {
+            Icon(
+                imageVector = Icons.Default.InsertPhoto,
+                tint = grayTintColor,
+                contentDescription = null,
+                modifier = modifier)
+        }
         Column(modifier = Modifier.padding(all = 10f.dp)) {
             Text(text = puppyItem?.name.toString())
         }
@@ -42,7 +54,7 @@ fun PuppyProfileScreen(navController: NavController,
             PuppyProfile(puppyItem = puppyItem!!)
             TopAppBar(
                 title = {
-                    Text(text = "PuppyApp")
+                    Text(text = puppyItem.name)
                 },
                 backgroundColor = Color.Transparent,
                 elevation = 0f.dp
