@@ -13,39 +13,13 @@ import com.example.androiddevchallenge.ui.theme.PuppyAppTheme
 @Composable
 fun PuppyApp() {
     val navController = rememberNavController()
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = "PuppyApp")
-                }
-            )
+    NavHost(navController, startDestination = "list") {
+        composable("list") {
+            PuppyListScreen(navController)
         }
-    ) { innerPadding ->
-        NavHost(navController, startDestination = "list") {
-            composable("list") {
-                PuppyList(navController, padding = innerPadding)
-            }
-            composable("profile/{puppyId}") { backstackEntry ->
-                val puppyId = backstackEntry.arguments?.getString("puppyId")
-                PuppyProfile(navController, puppyId)
-            }
+        composable("profile/{puppyId}") { backstackEntry ->
+            val puppyId = backstackEntry.arguments?.getString("puppyId")
+            PuppyProfileScreen(navController, puppyId)
         }
-    }
-}
-
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun LightPreview() {
-    PuppyAppTheme {
-        PuppyApp()
-    }
-}
-
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    PuppyAppTheme(darkTheme = true) {
-        PuppyApp()
     }
 }
