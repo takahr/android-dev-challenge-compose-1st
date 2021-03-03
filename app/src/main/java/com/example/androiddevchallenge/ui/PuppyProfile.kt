@@ -1,5 +1,8 @@
 package com.example.androiddevchallenge.ui
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -8,7 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.InsertPhoto
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -26,7 +29,8 @@ import com.example.androiddevchallenge.ui.theme.grayTintColor
 @Composable
 fun PuppyProfile(puppyItem: PuppyItem) {
     Column {
-        val modifier = Modifier.fillMaxWidth()
+        val modifier = Modifier
+            .fillMaxWidth()
             .aspectRatio(1.2f)
         if (puppyItem.imageId > 0) {
             Image(
@@ -48,6 +52,7 @@ fun PuppyProfile(puppyItem: PuppyItem) {
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun PuppyProfileScreen(navController: NavController,
                        puppyId: String?,
@@ -55,25 +60,36 @@ fun PuppyProfileScreen(navController: NavController,
 
     val puppyItem: PuppyItem? = puppyListViewModel.find(puppyId)
     val scrollState = rememberScrollState()
-
+    var visibility by remember { mutableStateOf(false) }
     Surface {
-        Box(Modifier.verticalScroll(scrollState)) {
-            PuppyProfile(puppyItem = puppyItem!!)
-            TopAppBar(
-                title = {
-                    Text(text = puppyItem.name)
-                },
-                backgroundColor = Color.Transparent,
-                elevation = 0f.dp,
-                navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(
-                            imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = stringResource(R.string.label_back)
-                        )
+        LaunchedEffect("PuppyProfile") {
+            visibility = true
+        }
+        
+        AnimatedVisibility(
+            visible = visibility,
+            enter = slideInHorizontally(
+                initialOffsetX = { it / 2 },
+                animationSpec = tween(durationMillis = 400, easing = LinearOutSlowInEasing))
+        ) {
+            Box(Modifier.verticalScroll(scrollState)) {
+                PuppyProfile(puppyItem = puppyItem!!)
+                TopAppBar(
+                    title = {
+                        Text(text = puppyItem.name)
+                    },
+                    backgroundColor = Color.Transparent,
+                    elevation = 0f.dp,
+                    navigationIcon = {
+                        IconButton(onClick = { navController.navigateUp() }) {
+                            Icon(
+                                imageVector = Icons.Rounded.ArrowBack,
+                                contentDescription = stringResource(R.string.label_back)
+                            )
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

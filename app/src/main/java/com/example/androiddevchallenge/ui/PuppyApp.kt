@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -10,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.ui.theme.PuppyAppTheme
 
+@ExperimentalAnimationApi
 @Composable
 fun PuppyApp() {
     val navController = rememberNavController()
