@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.androiddevchallenge.R
@@ -46,7 +47,7 @@ fun PuppyProfile(puppyItem: PuppyItem) {
                 modifier = modifier)
         }
         Column(modifier = Modifier.padding(all = 10f.dp)) {
-            Text(text = puppyItem.name)
+            Text(text = puppyItem.name, fontSize = 18f.sp)
             Spacer(Modifier.height(600f.dp))
         }
     }

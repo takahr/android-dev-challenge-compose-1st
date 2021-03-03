@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
@@ -36,23 +37,23 @@ fun ListItem(puppyItem: PuppyItem,
             .clickable {
                 onClick(puppyItem)
             }) {
-        val modifier = Modifier
-            .width(80f.dp)
-            .height(80f.dp)
+        val thumbModifier = Modifier
+            .width(120f.dp)
+            .height(120f.dp)
         if (puppyItem.thumbnailId > 0) {
             Image(
                 painter = painterResource(id = puppyItem.thumbnailId),
                 contentDescription = null,
-                modifier = modifier)
+                modifier = thumbModifier)
         } else {
             Icon(
                 imageVector = Icons.Default.InsertPhoto,
                 tint = grayTintColor,
                 contentDescription = null,
-                modifier = modifier)
+                modifier = thumbModifier)
         }
         Spacer(modifier = Modifier.width(10f.dp))
-        Text(text = puppyItem.name)
+        Text(text = puppyItem.name, fontSize = 18f.sp)
     }
 }
 
