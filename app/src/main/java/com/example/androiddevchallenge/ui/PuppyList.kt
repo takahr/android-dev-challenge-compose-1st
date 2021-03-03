@@ -15,11 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
+import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.data.PuppyItem
 import com.example.androiddevchallenge.data.PuppyListViewModel
 import com.example.androiddevchallenge.ui.theme.grayTintColor
@@ -76,7 +78,7 @@ fun PuppyListScreen(navController: NavController,
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "PuppyApp")
+                    Text(text = stringResource(R.string.app_name))
                 }
             )
         }
