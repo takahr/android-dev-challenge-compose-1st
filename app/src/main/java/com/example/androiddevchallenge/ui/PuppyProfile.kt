@@ -2,6 +2,8 @@ package com.example.androiddevchallenge.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.InsertPhoto
@@ -40,7 +42,8 @@ fun PuppyProfile(puppyItem: PuppyItem) {
                 modifier = modifier)
         }
         Column(modifier = Modifier.padding(all = 10f.dp)) {
-            Text(text = puppyItem?.name.toString())
+            Text(text = puppyItem.name)
+            Spacer(Modifier.height(600f.dp))
         }
     }
 }
@@ -51,9 +54,10 @@ fun PuppyProfileScreen(navController: NavController,
                        puppyListViewModel: PuppyListViewModel = viewModel()) {
 
     val puppyItem: PuppyItem? = puppyListViewModel.find(puppyId)
+    val scrollState = rememberScrollState()
 
     Surface {
-        Box {
+        Box(Modifier.verticalScroll(scrollState)) {
             PuppyProfile(puppyItem = puppyItem!!)
             TopAppBar(
                 title = {
